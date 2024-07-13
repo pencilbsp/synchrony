@@ -82,7 +82,6 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
 
 # Gatsby files
 .cache/
@@ -119,8 +118,6 @@ dist
 *.cleaned.js
 *.dev.js
 *.dev.ts
-
-dist/
 
 scratch/
 !scratch/config.js
