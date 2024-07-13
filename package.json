@@ -10,7 +10,8 @@
     "build": "node scripts/build.js",
     "watch": "node scripts/build.js --watch",
     "clean": "rimraf dist/",
-    "docs": "typedoc --options ./typedoc.json"
+    "docs": "typedoc --options ./typedoc.json",
+    "prepare": "bun run build"
   },
   "repository": {
     "type": "git",
