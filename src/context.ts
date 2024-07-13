@@ -110,9 +110,11 @@ export default class Context {
     ast: Program,
     transformers: [string, Partial<TransformerOptions>][],
     isModule: boolean,
+    enableLog: boolean,
     source?: string
   ) {
     this.ast = ast
+    this.enableLog = enableLog
     this.transformers = this.buildTransformerList(transformers)
 
     this.source = source

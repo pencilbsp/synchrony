@@ -69,6 +69,8 @@ export interface DeobfuscateOptions {
    * Loose parsing (default = false)
    */
   loose: boolean
+
+  enableLog: boolean
 }
 
 function sourceHash(str: string) {
@@ -90,6 +92,7 @@ export class Deobfuscator {
     rename: false,
     sourceType: 'both',
     loose: false,
+    enableLog: false,
   }
 
   private buildOptions(
@@ -160,11 +163,14 @@ export class Deobfuscator {
       options.customTransformers.length > 0
         ? options.customTransformers
         : defaultTransformers,
-      options.sourceType === 'module'
+      options.sourceType === 'module',
+      options.enableLog
     )
 
     for (const t of context.transformers) {
-      console.log('Running', t.name, 'transformer')
+      if (options.enableLog) {
+        console.log('Running', t.name, 'transformer')
+      }
       await t.transform(context)
     }
 
@@ -180,11 +186,14 @@ export class Deobfuscator {
       context = new Context(
         parsed,
         [['Rename', {}]],
-        options.sourceType === 'module'
+        options.sourceType === 'module',
+        options.enableLog
       )
       context.hash = sourceHash(source)
       for (const t of context.transformers) {
-        console.log('(rename) Running', t.name, 'transformer')
+        if (options.enableLog) {
+          console.log('(rename) Running', t.name, 'transformer')
+        }
         await t.transform(context)
       }
     }
